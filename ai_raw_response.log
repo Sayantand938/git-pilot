@@ -1,0 +1,36 @@
+
+--- 2025-09-05T21:55:36.674928 ---
+"feat(ai-utils): Log raw AI responses to file\n\nIntroduce a mechanism to log the raw text output from the AI commit message generator.\nThis change adds a `log_raw_response` function that appends the AI's full response,\nalong with a timestamp, to `ai_raw_response.log`.\nThis will assist in debugging, understanding AI behavior, and auditing the generated outputs."
+-----------------------
+
+--- 2025-09-05T21:59:46.036894 ---
+'```\nchore(ai-utils): Init raw response log & refine AI prompt\n\n- Add `ai_raw_response.log` containing the first raw AI response.\n- Refine AI prompt instructions for generating commit messages:\n    - Clarify that the "short summary" refers to the first line.\n    - Introduce a requirement to use bullet points (-) in the body section.\n    - Update the line break rule to prevent breaks within bullet points.\n```'
+-----------------------
+
+--- 2025-09-05T22:01:32.499521 ---
+'feat(ai-utils): Enhance AI commit generation with retries & cleanup\n\n- Implement exponential backoff and retry logic for AI API calls.\n- Add post-processing functions to clean AI responses:\n    - Remove markdown code fences (```).\n    - Consolidate commit body, preserving bullets and fixing line breaks.\n- Refine AI prompt instructions for clearer formatting, including bullet points.\n- Initialize `ai_raw_response.log` with the first raw AI response.'
+-----------------------
+
+--- 2025-09-05T22:05:58.373245 ---
+'feat(init): Establish AI-powered Git commit assistant\n\n- Set up the main `ai_commit.py` script for interactive commit message generation.\n- Implement AI message generation using Gemini, including exponential backoff and retries.\n- Add post-processing for AI responses to remove code fences and format the commit body.\n- Introduce `utils/git_utils.py` for repository interaction and staged diff retrieval.\n- Create `config.py` to manage environment variables like `GEMINI_API_KEY`.\n- Define project dependencies in `requirements.txt`.\n- Add `commit_template.txt` to guide AI-generated message structure.\n- Implement logging of raw AI responses to `ai_raw_response.log` for debugging.\n- Include an initial `.gitignore` to exclude `.env` files.\n- Provide `scripts/git-pilot.bat` for easy execution on Windows.'
+-----------------------
+
+--- 2025-09-06T01:07:22.574533 ---
+'feat(ui, data): Add loading skeletons and chapter content\n\n- Remove `framer-motion` for client-side page transitions, simplifying the UI.\n- Introduce skeleton loaders for the Home, Chapter Index, and Exercise pages\n  to improve perceived performance during data fetching.\n- Implement persistent theme selection (light/dark mode) using local storage\n  and system preference, ensuring user choices are remembered.\n- Add comprehensive exercise data for Chapter 2 (2.1, 2.2, 2.3), Chapter 3,\n  and Chapter 20.\n- Standardize chapter data filenames by renaming `chapter-15.json` to `15.json`.\n- Update `chapter-map.json` to reflect new chapter content and remove placeholder\n  chapters.\n- Bump various dependencies including `@tailwindcss/vite`, `tailwindcss`,\n  `eslint`, `@types/node`, and `@eslint/js` to their latest versions.'
+-----------------------
+
+--- 2025-09-06T01:15:40.302787 ---
+'feat(multi-book): implement multi-book support\n\nThis commit introduces a foundational multi-book architecture to the application.\n\n- Introduced `src/data/books.json` to store metadata for multiple books and their chapters.\n- Migrated existing chapter data from `chapter-map.json` (which was deleted) to `books.json`.\n- Restructured data files, moving chapter and exercise JSONs into book-specific directories (e.g., `src/data/ganitprabha/`).\n- Refactored `src/lib/data-service.ts` to handle book-specific data fetching and dynamic imports.\n- Updated application routing to incorporate `bookId` as a parameter for navigation.\n- Created `ChapterListPage.tsx` to display chapters for a selected book.\n- Transformed `HomePage.tsx` to list available books instead of individual chapters.\n- Adapted `ChapterIndexPage.tsx` and `ExercisePage.tsx` to work with the new `bookId` parameter and data structure.'
+-----------------------
+
+--- 2025-09-06T01:45:58.388016 ---
+'refactor(data): implement dynamic book index generation\n\nOverhaul how book and exercise data is structured, indexed, and fetched.\n\n- Move all book, chapter, and exercise JSON data from `src/data` to `public/books`.\n- Introduce `scripts/generate-book-index.cjs` to dynamically create/update `public/books/books.json` at build time.\n- The index script scans chapter directories to populate available exercises for each chapter.\n- Integrate `generate-book-index` into `dev` and `build` scripts for automated data indexing.\n- Update `data-service.ts` to asynchronously `fetch` book and exercise metadata from `public/books/books.json`.\n- Exercise content JSON files are now fetched directly from the `public` directory at runtime.\n- Remove the static `src/data/books.json` and the dynamic `import.meta.glob` for exercises.\n- Adjust page components to use the new asynchronous data fetching methods.'
+-----------------------
+
+--- 2025-09-06T12:42:37.743733 ---
+"refactor(timer): redesign timer as a stopwatch\n\nThis commit significantly refactors the timer functionality, transitioning\nit from a fixed-duration countdown (Pomodoro-style) to a flexible\nstopwatch.\n\nKey changes include:\n- Timer now counts up (timeElapsed) instead of down (timeLeft).\n- Removed the fixed 'focus duration' setting from the Settings feature\n  and its associated UI component.\n- Added a 'Finish & Log' button to explicitly record the duration of a\n  focus session once completed, with a minimum 1-minute requirement.\n- Updated `focus-sheet.store`'s `addSession` to support an optional\n  `showToast` parameter, allowing for custom notification handling.\n- Redesigned timer UI with icon-only controls, dynamic button states,\n  tooltips, and a simpler HH:MM:SS display format.\n- Updated various application icons for Android, iOS, macOS, and Windows\n  to ensure consistent branding and support new resolutions.\n- Removed desktop notifications for session completion in favor of in-app\n  toasts for session logging."
+-----------------------
+
+--- 2025-09-06T16:15:23.881141 ---
+'feat(content): Add Ganitprabha Ch 11.1 & 17, refine instructions\n\n- Add Ganitprabha Chapter 11.1 content: "SQUARE ROOT OF FRACTIONS".\n- Include 15 questions with detailed solutions for Chapter 11.1.\n- Add Ganitprabha Chapter 17 content: "AREAS OF RECTANGLES & SQUARES".\n- Include 19 questions with detailed solutions for Chapter 17.\n- Rename `pdf-transcribing.md` from `src/instruction/` to `instruction/`.'
+-----------------------

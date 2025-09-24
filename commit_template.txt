@@ -1,0 +1,15 @@
+Standard Git commit message format:
+<type>(<scope>): <short summary>
+
+type: feat, fix, docs, style, refactor, test, chore
+scope: optional area of the codebase (like api, ui, etc.)
+short summary: 50 characters or less
+
+Optional body: explain what was changed and why (wrap at 72 characters)
+Optional footer: reference issues, breaking changes, etc.
+
+Example:
+feat(api): add user authentication endpoint
+
+Added JWT-based authentication for the API.
+Fixes issue #42
